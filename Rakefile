@@ -4,7 +4,7 @@ require 'redmine_plugin_support'
 Dir[File.expand_path(File.dirname(__FILE__)) + "/lib/tasks/**/*.rake"].sort.each { |ext| load ext }
 
 RedminePluginSupport::Base.setup do |plugin|
-  plugin.project_name = 'bulk_time_entry_plugin'
+  plugin.project_name = 'bulk_time_entry'
   plugin.default_task = [:test]
   plugin.tasks = [:doc, :release, :clean, :test, :db, :metrics]
   # TODO: gem not getting this automaticly
@@ -13,7 +13,7 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "bulk_time_entry_plugin"
+    s.name = "bulk_time_entry"
     s.summary = "This is a plugin to enter multiple time entries at one time."
     s.email = "edavis@littlestreamsoftware.com"
     s.homepage = "https://projects.littlestreamsoftware.com/projects/redmine-bte"

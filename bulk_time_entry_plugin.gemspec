@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{bulk_time_entry_plugin}
+  s.name = %q{bulk_time_entry}
   s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
      "lang/nl.yml",
      "lang/pl.yml",
      "lib/bulk_time_entry_compatibility.rb",
-     "lib/bulk_time_entry_plugin/patches/time_entry_patch.rb",
+     "lib/bulk_time_entry/patches/time_entry_patch.rb",
      "lib/tasks/import_from_csv.rake",
      "rails/init.rb",
      "test/functional/bulk_time_entries_controller_test.rb",
@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
      "test/unit/bulk_time_entry_test.rb",
      "test/unit/bulk_time_entry_transaction_test.rb",
      "test/unit/helpers/bulk_time_entries_helper_test.rb",
-     "test/unit/lib/bulk_time_entry_plugin/patches/time_entry_patch_test.rb",
+     "test/unit/lib/bulk_time_entry/patches/time_entry_patch_test.rb",
      "test/unit/sanity_test.rb"
   ]
   s.homepage = %q{https://projects.littlestreamsoftware.com/projects/redmine-bte}
@@ -74,7 +74,7 @@ Gem::Specification.new do |s|
      "test/unit/bulk_time_entry_transaction_test.rb",
      "test/unit/bulk_time_entry_test.rb",
      "test/unit/helpers/bulk_time_entries_helper_test.rb",
-     "test/unit/lib/bulk_time_entry_plugin/patches/time_entry_patch_test.rb",
+     "test/unit/lib/bulk_time_entry/patches/time_entry_patch_test.rb",
      "test/unit/sanity_test.rb",
      "test/functional/bulk_time_entries_controller_test.rb"
   ]

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BulkTimeEntryPlugin::Patches::TimeEntryPatchTest < ActiveSupport::TestCase
+class BulkTimeEntry::Patches::TimeEntryPatchTest < ActiveSupport::TestCase
   context "TimeEntry#create_bulk_time_entry" do
     setup do
       User.current = @user = User.generate_with_protected!
