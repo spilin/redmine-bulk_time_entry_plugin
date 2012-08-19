@@ -1,5 +1,7 @@
 <% if @issues.nil? || @issues.empty? %>
-<em><%= l(:label_no_data) %></em>
+  <em><%= l(:label_no_data) %></em>
 <% else %>
-<%= select_tag "time_entries[#{rnd}][issue_id]", grouped_options_for_issues(@issues).html_safe, :style => 'max-width: 95%;' %>&nbsp;
+  <%= labelled_fields_for("time_entries[#{id}]", defined?(time_entry) ? time_entry : TimeEntry.new) do |f| %>
+    <%= f.select :issue_id, grouped_options_for_issues(@issues, f.object.issue_id).html_safe, :style => 'max-width: 95%;' %>&nbsp;
+  <% end %>
 <% end %>

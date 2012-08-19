@@ -8,10 +8,11 @@ module BulkTimeEntryPlugin
       module ClassMethods
 
         def create_bulk_time_entry(entry)
+          project_id = entry.delete(:project_id)
           time_entry = TimeEntry.new(entry)
           time_entry.hours = nil if time_entry.hours.blank? or time_entry.hours <= 0
-          if BulkTimeEntriesController.allowed_project?(entry[:project_id])
-            time_entry.project_id = entry[:project_id] # project_id is protected from mass assignment
+          if BulkTimeEntriesController.allowed_project?(project_id)
+            time_entry.project_id = project_id # project_id is protected from mass assignment
           end
           time_entry.user = User.current
           time_entry.save

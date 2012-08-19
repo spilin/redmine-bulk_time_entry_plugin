@@ -1,2 +1,1 @@
-$('#entry_<%= params[:entry_id] %>_issues').replaceWith('<%=j render :partial => 'issues_selector', :locals => { :issues => @issues, :rnd => params[:entry_id].split('_')[1]  }  %>');
-$('#<%= params[:entry_id] %>__activities').replaceWith("<%= render :partial => 'activities_selector', :locals => { :rnd => params[:entry_id].split('_')[1], :activities => (@selected_project.present? ? @selected_project.activities : [])  }  %>");
+$('#entry_<%= params[:id] %> .entry_issues').html('<%=j render :partial => 'issues_selector', :locals => { :issues => @issues, :id => params[:id] }  %>');

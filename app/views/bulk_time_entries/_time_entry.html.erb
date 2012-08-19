@@ -1,35 +1,33 @@
-<%= labelled_fields_for('time_entries[]', time_entry) do |f| %>
-  <%# trick to have automatically populated html id/names of fields %>
-  <% time_entry.id = rnd = rand(9999)
-  @object = time_entry 
-  @object_name = 'time_entry' -%>
-  <div class="box" id="entry_<%= rnd %>">
-    <%= error_messages_for 'time_entry' %>
+<%= labelled_fields_for("time_entries[#{id}]", time_entry) do |f| %>
+  <div class="box" id="entry_<%= id %>" data-id='<%= id %>' class='entry'>
+    <%= error_messages_for time_entry %>
     <p>
-      <% projects = project_tree_options_for_select(@projects, :selected => @first_project) %>
-      <%= f.select :project_id, projects, {}, {:id => 'project_select', data: {entry_id: time_entry.id}} %>&nbsp;
+      <% projects = project_tree_options_for_select(@projects, :selected => f.object.project || @first_project) %>
+      <%= f.select :project_id, projects, { required: true }, { :class => 'project_select', data: { id: id } } %>&nbsp;
     </p>
-    <p id="entry_<%= rnd %>_issues">
-    <% @issues = get_issues @first_project.id %>
-    <%= render :partial => 'issues_selector', :locals => { :issues => @issues, :f => f, :rnd => rnd } %>
+
+    <p class="entry_issues">
+      <% @issues = get_issues(f.object.project_id || @first_project.id) %>
+      <%= render :partial => 'issues_selector', :locals => { :issues => @issues, id: id, time_entry: time_entry } %>
     </p>
+
     <p>
-      <%= f.text_field :spent_on, :size => 10, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %><%= calendar_for("time_entries_#{rnd}_spent_on") %>
+      <%= f.text_field :spent_on, :size => 10, :class => 'spent_on', required: true %><%= calendar_for("entry_#{id} .spent_on") %>
     </p>
+
     <p>
-      <%= f.text_field :hours, :size => 6, :maxlength => 6 %>
+      <%= f.text_field :hours, :size => 6, :maxlength => 6, required: true %>
     </p>
+
     <p>
       <%= f.text_field :comments, :size => 100, :maxlength => 255 %>
     </p>
-    <p id="entry_<%= rnd %>_activities">
-      <%= render :partial => 'activities_selector', :locals => {:rnd => rnd, :f => f, :activities => @first_project.activities } %>
+
+    <p class="entry_activities">
+      <%= render :partial => 'activities_selector', :locals => { :id => id, :f => f, :activities => @first_project.activities } %>
     </p>
     <% time_entry.custom_field_values.each do |value| %>
-      <p><%= custom_field_tag_with_label "time_entries[#{rnd}]", value %></p>
+      <p><%= custom_field_tag_with_label "time_entries[#{time_entry.id}]", value %></p>
     <% end if time_entry.respond_to?(:custom_field_values) %>
   </div>
 <% end %>
-
-<%= javascript_tag("Element.scrollTo('time_entries_#{time_entry.id}_project_id')") %>
-<%= javascript_tag("Form.Element.focus('time_entries_#{time_entry.id}_project_id')") %>

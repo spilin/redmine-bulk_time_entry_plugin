@@ -10,23 +10,23 @@ module BulkTimeEntriesHelper
     label
   end
   
-  def grouped_options_for_issues(issues)
+  def grouped_options_for_issues(issues, selected)
     closed_issues, open_issues = *issues.partition {|issue| issue.closed?}
 
     html = '<option></option>'
     unless open_issues.empty?
-      html << labeled_option_group_from_collection_for_select(:label_open_issues, open_issues)
+      html << labeled_option_group_from_collection_for_select(:label_open_issues, open_issues, selected)
     end
 
     unless closed_issues.empty?
-      html << labeled_option_group_from_collection_for_select(:label_closed_issues, closed_issues)
+      html << labeled_option_group_from_collection_for_select(:label_closed_issues, closed_issues, selected)
     end
     html
   end
 
-  def labeled_option_group_from_collection_for_select(label, collection)
+  def labeled_option_group_from_collection_for_select(label, collection, selected)
     html = "<optgroup label='#{l(label)}'>"
-    html << options_from_collection_for_select(collection, :id, :to_s)
+    html << options_from_collection_for_select(collection, :id, :to_s, selected: selected)
     html << "</optgroup>"
     html
   end
