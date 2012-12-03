@@ -27,7 +27,7 @@
       <%= render :partial => 'activities_selector', :locals => { :id => id, :f => f, :activities => @first_project.activities } %>
     </p>
     <% time_entry.custom_field_values.each do |value| %>
-      <p><%= custom_field_tag_with_label "time_entries[#{time_entry.id}]", value %></p>
+      <p><%= custom_field_tag_with_label "time_entries[#{id}]", value %></p>
     <% end if time_entry.respond_to?(:custom_field_values) %>
   </div>
 <% end %>
